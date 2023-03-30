@@ -20,11 +20,14 @@ const Navbar = () => {
 
         <li className="flex bg-white mx-auto h-8 w-full max-w-lg  rounded-full pr-3">
           <input
-            onChange={(e) => disptach(searchProduct(e.target.value))}
+            onChange={(e) =>
+              disptach(searchProduct(e.target.value.toLowerCase()))
+            }
             className="h-8 rounded-full w-full text-sm border-0 focus:ring-0 outline-none"
             type="text"
             name="search"
             id="search"
+            placeholder="Search with Brand name like amd/intel"
           />
           <button>
             <BiSearchAlt />

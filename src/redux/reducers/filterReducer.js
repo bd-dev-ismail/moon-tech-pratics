@@ -1,4 +1,5 @@
 import {
+  CLEAR_FILTER,
   SEARCH_PRODUCT,
   TOGGLE_BRAND,
   TOGGLE_STOCK,
@@ -45,6 +46,14 @@ export const filterReducer = (state = initalState, action) => {
       return {
         ...state,
         keyword: action.payload,
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filters: {
+          brands: [],
+          stock: false,
+        },
       };
     default:
       return state;

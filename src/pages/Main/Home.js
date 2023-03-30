@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../../components/ProductCard";
-import { toggleBrand, toggleStock } from "../../redux/actions/filterAction";
+import {
+  clearFilter,
+  toggleBrand,
+  toggleStock,
+} from "../../redux/actions/filterAction";
 
 import { loadProductData } from "../../redux/thunk/products/fetchProducts";
 
@@ -14,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(loadProductData());
   }, [dispatch]);
-
+  // console.log(keyword, "trest");
   // console.log(filters);
   const activeClass = "text-white  bg-indigo-500 border-white";
   let content;
@@ -22,6 +26,11 @@ const Home = () => {
     content = products.map((product) => (
       <ProductCard key={product.model} product={product} />
     ));
+  }
+  if (products.length && keyword.length) {
+    content = products
+      .filter((product) => keyword.includes(product.brand))
+      .map((product) => <ProductCard key={product.model} product={product} />);
   }
   if ((products.length && stock) || brands.length) {
     content = products
@@ -39,14 +48,18 @@ const Home = () => {
       })
       .map((product) => <ProductCard key={product.model} product={product} />);
   }
-  if (keyword.length) {
-    content = products
-      .filter((product) => product.model.includes(keyword))
-      .map((product) => <ProductCard key={product.model} product={product} />);
-  }
+
   return (
     <div className="max-w-7xl gap-14 mx-auto my-10">
       <div className="mb-10 flex justify-end gap-5">
+        {stock || brands.length ? (
+          <button
+            onClick={() => dispatch(clearFilter())}
+            className={`border px-3 py-2 rounded-full font-semibold text-white  bg-red-500 border-white `}
+          >
+            Clear Filter
+          </button>
+        ) : null}
         <button
           onClick={() => dispatch(toggleStock())}
           className={`border px-3 py-2 rounded-full font-semibold ${

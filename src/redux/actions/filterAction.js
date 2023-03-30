@@ -1,4 +1,5 @@
 import {
+  CLEAR_FILTER,
   SEARCH_PRODUCT,
   TOGGLE_BRAND,
   TOGGLE_STOCK,
@@ -17,6 +18,11 @@ export const toggleStock = () => {
   };
 };
 
+export const clearFilter = () => {
+  return {
+    type: CLEAR_FILTER,
+  };
+};
 export const searchProduct = (productName) => {
   return {
     type: SEARCH_PRODUCT,
