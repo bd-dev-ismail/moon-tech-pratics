@@ -6,8 +6,9 @@ import { toggleBrand, toggleStock } from "../../redux/actions/filterAction";
 import { loadProductData } from "../../redux/thunk/products/fetchProducts";
 
 const Home = () => {
-  const filters = useSelector((state) => state.filter.filters);
-  const { brands, stock } = filters;
+  const filter = useSelector((state) => state.filter);
+  const { brands, stock } = filter.filters;
+  const { keyword } = filter;
   const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,6 +37,11 @@ const Home = () => {
         }
         return product;
       })
+      .map((product) => <ProductCard key={product.model} product={product} />);
+  }
+  if (keyword.length) {
+    content = products
+      .filter((product) => product.model.includes(keyword))
       .map((product) => <ProductCard key={product.model} product={product} />);
   }
   return (

@@ -10,3 +10,4 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 //filter
 export const TOGGLE_BRAND = "TOGGLE_BRAND";
 export const TOGGLE_STOCK = "TOGGLE_STOCK";
+export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
