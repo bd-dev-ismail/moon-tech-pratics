@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductData } from "../../redux/thunk/products/deleteProduct";
 import { loadProductData } from "../../redux/thunk/products/fetchProducts";
-
+import { FaRegEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const ProductList = () => {
   const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
@@ -42,7 +43,10 @@ const ProductList = () => {
                   <div class="font-semibold text-left">Price</div>
                 </th>
                 <th class="p-2">
-                  <div class="font-semibold text-center">Action</div>
+                  <div class="font-semibold text-center">Remove</div>
+                </th>
+                <th class="p-2">
+                  <div class="font-semibold text-center">Edit</div>
                 </th>
               </tr>
             </thead>
@@ -91,6 +95,15 @@ const ProductList = () => {
                           ></path>
                         </svg>
                       </button>
+                    </div>
+                  </td>
+                  <td className="p-2">
+                    <div className="flex justify-center">
+                      <Link to={`edit/${_id}`}>
+                        <button>
+                          <FaRegEdit className="w-6 h-6" />
+                        </button>
+                      </Link>
                     </div>
                   </td>
                 </tr>
